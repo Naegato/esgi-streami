@@ -4,6 +4,7 @@ services:
     build:
       context: .
       target: frankenphp_dev
+    user: "${CURRENT_UID:-1000:1000}"
     volumes:
       - ./:/app
       - ./frankenphp/Caddyfile:/etc/caddy/Caddyfile:ro
