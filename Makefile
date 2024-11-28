@@ -11,7 +11,7 @@ up:
 down:
 	docker compose down
 
-update-db:
+update-db: create-db
 	docker compose exec ${PHP_CONTAINER_NAME} bin/console doctrine:migrations:migrate --no-interaction
 
 create-db:
@@ -20,13 +20,13 @@ create-db:
 drop-db:
 	docker compose exec ${PHP_CONTAINER_NAME} bin/console doctrine:database:drop --force --if-exists
 
-migration:
+migration: create-db
 	docker compose exec ${PHP_CONTAINER_NAME} bin/console make:migration
 
 entity:
 	docker compose exec -it ${PHP_CONTAINER_NAME} bin/console make:entity
 
-fixtures:
+fixtures: create-db
 	docker compose exec ${PHP_CONTAINER_NAME} bin/console doctrine:fixtures:load --no-interaction
 
 logs:
