@@ -1,0 +1,5 @@
+App\Entity\User:
+  user_1:
+    username: 'user1'
+    email: 'mawime.wiatr@gmail.com'
+    password: 'password'

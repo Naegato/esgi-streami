@@ -5,7 +5,7 @@ PHP_CONTAINER_NAME := php
 -include .env
 -include .env.local
 
-up:
+up: install
 	docker compose up -d
 
 down:
@@ -27,13 +27,13 @@ entity:
 	docker compose exec -it ${PHP_CONTAINER_NAME} bin/console make:entity
 
 fixtures: create-db
-	docker compose exec ${PHP_CONTAINER_NAME} bin/console doctrine:fixtures:load --no-interaction
+	docker compose exec ${PHP_CONTAINER_NAME} bin/console hautelook:fixtures:load --no-interaction
 
 logs:
 	docker compose logs -f
 
 install:
-	docker compose exec ${PHP_CONTAINER_NAME} composer install
+	docker compose run --rm ${PHP_CONTAINER_NAME} composer install
 
 cmd:
 	docker compose exec -it ${PHP_CONTAINER_NAME} bash
