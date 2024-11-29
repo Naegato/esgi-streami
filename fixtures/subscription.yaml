@@ -1,0 +1,28 @@
+App\Entity\Subscription:
+  subscription_monthly:
+    name: 'Abonnement mensuel'
+    price: 599
+    durationInMonths: 1
+  subscription_annual:
+    name: 'Abonnement annuel'
+    price: 6997
+    durationInMonths: 12
+  subscription_lifetime:
+    name: 'Abonnement à vie'
+    price: 99798
+    durationInMonths: 9999
+  subscription_3_months:
+    name: 'Abonnement 3 mois'
+    price: 15.35
+    durationInMonths: 3
+  subscription_6_months:
+    name: 'Abonnement 6 mois'
+    price: 28.78
+    durationInMonths: 6
+
+App\Entity\SubscriptionHistory:
+  sub_history:
+    startAt: '<dateTimeBetween("-1 year", "now")>'
+    endAt: '<dateTimeBetween("now", "+1 year")>'
+    subscriber: '@user_*'
+    subscription: '@subscription_*'

@@ -1,0 +1,25 @@
+App\Entity\Media:
+  media (template):
+    title: 'Media <words(3, true)>'
+    releaseAt: <dateTimeBetween('-10 years', 'now')>
+    shortDescription: <text(200)>
+    longDescription: <text(1000)>
+    coverImage: '<picsumUrl(640, 480)>'
+    categories: ['@category_*', '@category_*', '@category_*']
+    languages: ['@language_*', '@language_*']
+
+App\Entity\Serie:
+  media_serie_{1..30} (extends media):
+    title: 'Serie <words(3, true)>'
+    seasons: []
+
+App\Entity\Movie:
+  media_movie_{1..50} (extends media):
+    title: 'Movie <words(3, true)>'
+
+App\Entity\WatchHistory:
+  watch_history_{1..500}:
+    lastWatchedAt: "<dateTimeBetween('-1 week', '+1 week')>"
+    numberOfViews: '<numberBetween(1, 100)>'
+    viewer: '@user_*'
+    media: '@media_*'

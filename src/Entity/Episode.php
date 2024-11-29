@@ -21,7 +21,7 @@ class Episode
     private ?\DateTimeInterface $duration = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $releaseDate = null;
+    private ?\DateTimeInterface $releaseAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'episodes')]
     #[ORM\JoinColumn(nullable: false)]
@@ -56,14 +56,14 @@ class Episode
         return $this;
     }
 
-    public function getReleaseDate(): ?\DateTimeInterface
+    public function getReleaseAt(): ?\DateTimeInterface
     {
-        return $this->releaseDate;
+        return $this->releaseAt;
     }
 
-    public function setReleaseDate(\DateTimeInterface $releaseDate): static
+    public function setReleaseAt(\DateTimeInterface $releaseAt): static
     {
-        $this->releaseDate = $releaseDate;
+        $this->releaseAt = $releaseAt;
 
         return $this;
     }

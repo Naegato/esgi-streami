@@ -32,6 +32,9 @@ class Comment
     #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parentComment')]
     private Collection $childComments;
 
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    private ?Media $media = null;
+
     public function __construct()
     {
         $this->childComments = new ArrayCollection();
@@ -104,6 +107,18 @@ class Comment
                 $childComment->setParentComment(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMedia(): ?Media
+    {
+        return $this->media;
+    }
+
+    public function setMedia(?Media $media): static
+    {
+        $this->media = $media;
 
         return $this;
     }

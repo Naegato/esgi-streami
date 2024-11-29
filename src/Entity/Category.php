@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategorieRepository::class)]
-class Categorie
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
+class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,11 +25,11 @@ class Categorie
      * @var Collection<int, Media>
      */
     #[ORM\ManyToMany(targetEntity: Media::class, inversedBy: 'categories')]
-    private Collection $Ãmedias;
+    private Collection $medias;
 
     public function __construct()
     {
-        $this->Ãmedias = new ArrayCollection();
+        $this->medias = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -64,15 +64,15 @@ class Categorie
     /**
      * @return Collection<int, Media>
      */
-    public function getÃmedias(): Collection
+    public function getMedias(): Collection
     {
-        return $this->Ãmedias;
+        return $this->medias;
     }
 
     public function addMedia(Media $media): static
     {
-        if (!$this->Ãmedias->contains($media)) {
-            $this->Ãmedias->add($media);
+        if (!$this->medias->contains($media)) {
+            $this->medias->add($media);
         }
 
         return $this;
@@ -80,7 +80,7 @@ class Categorie
 
     public function removeMedia(Media $media): static
     {
-        $this->Ãmedias->removeElement($media);
+        $this->medias->removeElement($media);
 
         return $this;
     }
