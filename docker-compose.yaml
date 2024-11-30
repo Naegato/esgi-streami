@@ -37,6 +37,13 @@ services:
     ports:
       - 5432:5432
 
+  node:
+    image: node:22
+    volumes:
+      - ./:/srv:cached
+    working_dir: /srv
+    command: sh -c "npm install && npm run watch"
+
 #  adminer:
 #    image: adminer:4.8.1
 

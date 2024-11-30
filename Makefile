@@ -1,6 +1,7 @@
 .PHONY: up down update-db create-db drop-db migration entity fixtures logs install cmd
 
 PHP_CONTAINER_NAME := php
+NODE_CONTAINER_NAME := node
 
 -include .env
 -include .env.local
@@ -33,7 +34,23 @@ logs:
 	docker compose logs -f
 
 install:
-	docker compose run --rm ${PHP_CONTAINER_NAME} composer install
+	@if [ -z "$$(docker compose ps -q ${PHP_CONTAINER_NAME})" ]; then \
+		docker compose run --rm ${PHP_CONTAINER_NAME} composer install; \
+	else \
+		docker compose exec ${PHP_CONTAINER_NAME} composer install; \
+	fi
 
 cmd:
 	docker compose exec -it ${PHP_CONTAINER_NAME} bash
+
+assets-install:
+	docker compose run --rm ${NODE_CONTAINER_NAME} npm install
+
+assets-watch: assets-install
+	docker compose run --rm ${NODE_CONTAINER_NAME} npm run watch
+
+assets-logs:
+	docker compose logs ${NODE_CONTAINER_NAME} -f
+
+assets-cmd:
+	docker compose exec ${NODE_CONTAINER_NAME} bash
