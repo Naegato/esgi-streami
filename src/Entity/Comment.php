@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\CommentStatusEnum;
 use App\Repository\CommentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -34,6 +35,9 @@ class Comment
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     private ?Media $media = null;
+
+    #[ORM\Column(enumType: CommentStatusEnum::class, options: ['default' => CommentStatusEnum::PENDING])]
+    private ?CommentStatusEnum $status = null;
 
     public function __construct()
     {
@@ -119,6 +123,18 @@ class Comment
     public function setMedia(?Media $media): static
     {
         $this->media = $media;
+
+        return $this;
+    }
+
+    public function getStatus(): ?CommentStatusEnum
+    {
+        return $this->status;
+    }
+
+    public function setStatus(CommentStatusEnum $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
