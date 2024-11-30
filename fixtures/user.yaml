@@ -1,10 +1,20 @@
 App\Entity\User:
-  user_1:
+  user (template):
+    username: '<username()>'
+    email: '<email()>'
+    password: '<password()>'
+    accountStatus: !php/const \App\Enum\UserAccountStatusEnum::ACTIVE
+
+  user_1 (extends user):
     username: 'Maxime'
     email: 'mawime.wiatr@gmail.com'
     password: '1234'
 
-  user_{2..10}:
-    username: '<username()>'
-    email: '<email()>'
-    password: '<password()>'
+  user_{2..10} (extends user):
+    accountStatus: !php/const \App\Enum\UserAccountStatusEnum::ACTIVE
+
+  user_{11..20} (extends user):
+    accountStatus: !php/const \App\Enum\UserAccountStatusEnum::INACTIVE
+
+  user_{21..30} (extends user):
+    accountStatus: !php/const \App\Enum\UserAccountStatusEnum::BANNED

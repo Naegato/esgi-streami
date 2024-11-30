@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\UserAccountStatusEnum;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -54,6 +55,9 @@ class User
      */
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'publisher')]
     private Collection $comments;
+
+    #[ORM\Column(enumType: UserAccountStatusEnum::class, options: ['default' => UserAccountStatusEnum::INACTIVE])]
+    private ?UserAccountStatusEnum $accountStatus = null;
 
     public function __construct()
     {
@@ -251,6 +255,18 @@ class User
                 $comment->setPublisher(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAccountStatus(): ?UserAccountStatusEnum
+    {
+        return $this->accountStatus;
+    }
+
+    public function setAccountStatus(UserAccountStatusEnum $accountStatus): static
+    {
+        $this->accountStatus = $accountStatus;
 
         return $this;
     }
