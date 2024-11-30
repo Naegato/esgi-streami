@@ -15,7 +15,7 @@ class WatchHistory
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $lastWatched = null;
+    private ?\DateTimeInterface $lastWatchedAt = null;
 
     #[ORM\Column]
     private ?int $numberOfViews = null;
@@ -33,14 +33,14 @@ class WatchHistory
         return $this->id;
     }
 
-    public function getLastWatched(): ?\DateTimeInterface
+    public function getLastWatchedAt(): ?\DateTimeInterface
     {
-        return $this->lastWatched;
+        return $this->lastWatchedAt;
     }
 
-    public function setLastWatched(\DateTimeInterface $lastWatched): static
+    public function setLastWatchedAt(\DateTimeInterface $lastWatchedAt): static
     {
-        $this->lastWatched = $lastWatched;
+        $this->lastWatchedAt = $lastWatchedAt;
 
         return $this;
     }

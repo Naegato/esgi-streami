@@ -15,40 +15,43 @@ class SubscriptionHistory
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $startDate = null;
+    private ?\DateTimeInterface $startAt = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $endDate = null;
+    private ?\DateTimeInterface $endAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'subscriptionHistorie')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $subscriber = null;
+
+    #[ORM\ManyToOne(inversedBy: 'subscriptionHistories')]
+    private ?Subscription $subscription = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getStartAt(): ?\DateTimeInterface
     {
-        return $this->startDate;
+        return $this->startAt;
     }
 
-    public function setStartDate(\DateTimeInterface $startDate): static
+    public function setStartAt(\DateTimeInterface $startAt): static
     {
-        $this->startDate = $startDate;
+        $this->startAt = $startAt;
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getEndAt(): ?\DateTimeInterface
     {
-        return $this->endDate;
+        return $this->endAt;
     }
 
-    public function setEndDate(\DateTimeInterface $endDate): static
+    public function setEndAt(\DateTimeInterface $endAt): static
     {
-        $this->endDate = $endDate;
+        $this->endAt = $endAt;
 
         return $this;
     }
@@ -61,6 +64,18 @@ class SubscriptionHistory
     public function setSubscriber(?User $subscriber): static
     {
         $this->subscriber = $subscriber;
+
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscription $subscription): static
+    {
+        $this->subscription = $subscription;
 
         return $this;
     }

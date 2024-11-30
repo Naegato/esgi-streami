@@ -15,7 +15,7 @@ class PlaylistSubscription
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $subscriptionAt = null;
+    private ?\DateTimeInterface $subscribedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'playlistSubscriptions')]
     #[ORM\JoinColumn(nullable: false)]
@@ -30,14 +30,14 @@ class PlaylistSubscription
         return $this->id;
     }
 
-    public function getSubscriptionAt(): ?\DateTimeInterface
+    public function getSubscribedAt(): ?\DateTimeInterface
     {
-        return $this->subscriptionAt;
+        return $this->subscribedAt;
     }
 
-    public function setSubscriptionAt(\DateTimeInterface $subscriptionAt): static
+    public function setSubscribedAt(\DateTimeInterface $subscribedAt): static
     {
-        $this->subscriptionAt = $subscriptionAt;
+        $this->subscribedAt = $subscribedAt;
 
         return $this;
     }
