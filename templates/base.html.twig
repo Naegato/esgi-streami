@@ -18,6 +18,14 @@
         {% endblock %}
     </head>
     <body class="font-montserrat text-sm bg-white">
-        {% block body %}{% endblock %}
+        <div class="flex min-h-screen  2xl:max-w-screen-2xl 2xl:mx-auto 2xl:border-x-2 2xl:border-gray-200">
+            {% block sidebarLeft %}
+                {% include 'parts/sidebar-left.html.twig' %}
+            {% endblock %}
+            {% block body %}{% endblock %}
+            {% block sidebarRight %}
+                {% include 'parts/sidebar-right.html.twig' %}
+            {% endblock %}
+        </div>
     </body>
 </html>

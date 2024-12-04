@@ -73,6 +73,9 @@ class Media
     #[ORM\OneToMany(targetEntity: PlaylistMedia::class, mappedBy: 'media')]
     private Collection $playlistMedia;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $rating = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -311,6 +314,18 @@ class Media
                 $playlistMedium->setMedia(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(?int $rating): static
+    {
+        $this->rating = $rating;
 
         return $this;
     }
