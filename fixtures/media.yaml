@@ -4,7 +4,7 @@ App\Entity\Media:
     releaseAt: <dateTimeBetween('-10 years', 'now')>
     shortDescription: <text(200)>
     longDescription: <text(1000)>
-    coverImage: '<picsumUrl(640, 480)>'
+    coverImage: '<picsumUrl(640, 480, false, false, true)>'
     categories: ['@category_*', '@category_*', '@category_*']
     languages: ['@language_*', '@language_*']
     rating: '<numberBetween(1, 100)>'
