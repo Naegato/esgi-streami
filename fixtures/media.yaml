@@ -7,6 +7,7 @@ App\Entity\Media:
     coverImage: '<picsumUrl(640, 480)>'
     categories: ['@category_*', '@category_*', '@category_*']
     languages: ['@language_*', '@language_*']
+    rating: '<numberBetween(1, 100)>'
 
 App\Entity\Serie:
   media_serie_{1..30} (extends media):
@@ -14,8 +15,53 @@ App\Entity\Serie:
     seasons: []
 
 App\Entity\Movie:
-  media_movie_{1..50} (extends media):
-    title: 'Movie <words(3, true)>'
+  media_movie_1 (extends media):
+    title: 'Tenet'
+    coverImage: 'https://upload.wikimedia.org/wikipedia/en/1/14/Tenet_movie_poster.jpg'
+    rating: 74
+
+  media_movie_2 (extends media):
+    title: 'Fight Club'
+    coverImage: 'https://upload.wikimedia.org/wikipedia/en/f/fc/Fight_Club_poster.jpg'
+    rating: 88
+
+  media_movie_3 (extends media):
+    title: 'Dune'
+    coverImage: 'https://upload.wikimedia.org/wikipedia/en/8/8e/Dune_%282021_film%29.jpg'
+    rating: 81
+
+  media_movie_4 (extends media):
+    title: 'Interstellar'
+    coverImage: 'https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg'
+    rating: 92
+
+  media_movie_5 (extends media):
+    title: 'Matrix'
+    coverImage: 'https://upload.wikimedia.org/wikipedia/en/c/c1/The_Matrix_Poster.jpg'
+    rating: 71
+
+  media_movie_6 (extends media):
+    title: 'Batman The Dark Knight'
+    coverImage: 'https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg'
+    rating: 74
+
+  media_movie_7 (extends media):
+    title: 'John Wick 4'
+    coverImage: 'https://m.media-amazon.com/images/I/81vZ6tNxuoL._SY500_.jpg'
+    rating: 74
+
+  media_movie_8 (extends media):
+    title: 'Super Mario Bros'
+    coverImage: 'https://m.media-amazon.com/images/I/91zqGNzwk5L._AC_UF1000,1000_QL80_.jpg'
+    rating: 74
+
+  media_movie_9 (extends media):
+    title: 'Le comte de Monte Cristo'
+    coverImage: 'https://fr.web.img6.acsta.net/img/29/eb/29eb8341475fdb0b19b1d7b995b70e17.jpg'
+    rating: 74
+
+  media_movie_{10..30} (extends media):
+    title: 'Movie <words(3,true)>'
 
 App\Entity\WatchHistory:
   watch_history_{1..500}:
