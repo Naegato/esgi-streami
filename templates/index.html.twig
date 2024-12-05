@@ -5,9 +5,9 @@
     <main class="flex-1 py-10 px-5 sm:px-10">
         <section>
             <nav class="flex space-x-6 text-gray-400 font-medium">
-                <a href="#" class="hover:text-gray-700">Séries</a>
-                <a href="#" class="text-gray-700 font-semibold">Films</a>
-                <a href="#" class="hover:text-gray-700">Animés</a>
+                <a href="{{ path('category', {'id': 'serie' }) }}" class="hover:text-gray-700">Séries</a>
+                <a href="{{ path('category', {'id': 'film' }) }}" class="text-gray-700 font-semibold">Films</a>
+                <a href="{{ path('category', {'id': 'anime' }) }}" class="hover:text-gray-700">Animés</a>
             </nav>
             <div class="flex flex-col bg-top justify-between mt-4 bg-black/10 bg-blend-multiply rounded-3xl h-80 overflow-hidden bg-cover bg-center px-7 pt-4 pb-6 text-white"
                  style="background-image: url('https://resize.elle.fr/original/var/plain_site/storage/images/loisirs/cinema/news/inception-films-et-series-a-regarder-si-vous-aimez-le-film-avec-leonardo-dicaprio/97088011-1-fre-FR/Inception-5-films-et-series-a-regarder-si-vous-aimez-le-film-avec-Leonardo-DiCaprio.jpg');">
@@ -56,69 +56,16 @@
                 </div>
             </div>
             <ul class="mt-4 grid grid-cols-2 gap-y-5 sm:grid-cols-3 gap-x-5">
-                {% include 'parts/movie-card.html.twig' with {
-                    'image_path': 'https://upload.wikimedia.org/wikipedia/en/1/14/Tenet_movie_poster.jpg',
-                    'index': '1',
-                    'title': 'Tenet',
-                    'rating': '7.4'
-                } %}
+                {% for movie in movies %}
+                    {% include 'parts/movie-card.html.twig' with {
+                        'image_path': movie.coverImage,
+                        'index': loop.index,
+                        'title': movie.title,
+                        'rating': movie.rating,
+                        'id': movie.id
+                    }  %}
 
-                {% include 'parts/movie-card.html.twig' with {
-                    'image_path': 'https://upload.wikimedia.org/wikipedia/en/f/fc/Fight_Club_poster.jpg',
-                    'index': '2',
-                    'title': 'Fight Club',
-                    'rating': '8.8',
-                    'active': true
-                } %}
-
-                {% include 'parts/movie-card.html.twig' with {
-                    'image_path': 'https://upload.wikimedia.org/wikipedia/en/8/8e/Dune_%282021_film%29.jpg',
-                    'index': '3',
-                    'title': 'Dune',
-                    'rating': '8.1'
-                } %}
-
-                {% include 'parts/movie-card.html.twig' with {
-                    'image_path': 'https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg',
-                    'index': '4',
-                    'title': 'Interstellar',
-                    'rating': '9.2'
-                } %}
-
-                {% include 'parts/movie-card.html.twig' with {
-                    'image_path': 'https://upload.wikimedia.org/wikipedia/en/c/c1/The_Matrix_Poster.jpg',
-                    'index': '5',
-                    'title': 'Matrix',
-                    'rating': '7.1'
-                } %}
-
-                {% include 'parts/movie-card.html.twig' with {
-                    'image_path': 'https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg',
-                    'index': '6',
-                    'title': 'Batman The Dark Knight',
-                    'rating': '7.4'
-                } %}
-
-                {% include 'parts/movie-card.html.twig' with {
-                    'image_path': 'https://m.media-amazon.com/images/I/81vZ6tNxuoL._SY500_.jpg',
-                    'index': '7',
-                    'title': 'John Wick 4',
-                    'rating': '7.4'
-                } %}
-
-                {% include 'parts/movie-card.html.twig' with {
-                    'image_path': 'https://m.media-amazon.com/images/I/91zqGNzwk5L._AC_UF1000,1000_QL80_.jpg',
-                    'index': '8',
-                    'title': 'Super Mario Bros',
-                    'rating': '7.4'
-                } %}
-
-                {% include 'parts/movie-card.html.twig' with {
-                    'image_path': 'https://fr.web.img6.acsta.net/img/29/eb/29eb8341475fdb0b19b1d7b995b70e17.jpg',
-                    'index': '9',
-                    'title': 'Le comte de Monte Cristo',
-                    'rating': '7.4'
-                }  %}
+                {% endfor %}
             </ul>
         </section>
     </main>
