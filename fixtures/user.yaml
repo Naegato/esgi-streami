@@ -2,13 +2,13 @@ App\Entity\User:
   user (template):
     username: '<username()>'
     email: '<email()>'
-    password: '<password()>'
+    plainPassword: '<password()>'
     accountStatus: !php/const \App\Enum\UserAccountStatusEnum::ACTIVE
 
   user_1 (extends user):
     username: 'Maxime'
-    email: 'mawime.wiatr@gmail.com'
-    password: '1234'
+    email: 'maxime.wiatr@gmail.com'
+    plainPassword: '1234'
 
   user_{2..10} (extends user):
     accountStatus: !php/const \App\Enum\UserAccountStatusEnum::ACTIVE

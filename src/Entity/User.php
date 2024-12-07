@@ -9,10 +9,12 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -27,6 +29,8 @@ class User
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
+
+    private string $plainPassword = '';
 
     /**
      * @var Collection<int, WatchHistory>
@@ -60,6 +64,9 @@ class User
 
     #[ORM\Column(enumType: UserAccountStatusEnum::class, options: ['default' => UserAccountStatusEnum::INACTIVE])]
     private ?UserAccountStatusEnum $accountStatus = null;
+
+    #[ORM\Column(type: 'json', nullable: false, options: ['default' => '["ROLE_USER"]'])]
+    private array $roles = [];
 
     public function __construct()
     {
@@ -271,5 +278,37 @@ class User
         $this->accountStatus = $accountStatus;
 
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        return $this->roles ?? ['ROLE_USER'];
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function eraseCredentials(): void
+    {
+        $this->plainPassword = '';
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
+    }
+
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
     }
 }
