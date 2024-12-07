@@ -12,6 +12,9 @@ up: install
 down:
 	docker compose down
 
+cache-clear:
+	docker compose exec ${PHP_CONTAINER_NAME} bin/console cache:clear
+
 update-db: create-db
 	docker compose exec ${PHP_CONTAINER_NAME} bin/console doctrine:migrations:migrate --no-interaction
 
