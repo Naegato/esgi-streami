@@ -1,24 +1,40 @@
 App\Entity\Subscription:
-  subscription_monthly:
+  subscription (template):
+    name: '<words(3, true)>'
+    price: '<numberBetween(100, 10000)>'
+    durationInMonths: '<numberBetween(1, 100)>'
+    quality: '<word()>'
+    description: '<paragraph()>'
+    catchphrase: '<sentence()>'
+
+  subscription_monthly (extends subscription):
     name: 'Abonnement mensuel'
     price: 599
     durationInMonths: 1
-  subscription_annual:
+    quality: 'HD'
+  subscription_annual (extends subscription):
     name: 'Abonnement annuel'
     price: 6997
     durationInMonths: 12
-  subscription_lifetime:
+    quality: '4K HDR'
+  subscription_lifetime (extends subscription):
     name: 'Abonnement à vie'
     price: 99798
     durationInMonths: 9999
-  subscription_3_months:
+    quality: '4K HDR 3D'
+  subscription_3_months (extends subscription):
     name: 'Abonnement 3 mois'
-    price: 15.35
+    price: 1535
     durationInMonths: 3
-  subscription_6_months:
+    quality: 'HD'
+  subscription_6_months (extends subscription):
     name: 'Abonnement 6 mois'
-    price: 28.78
+    price: 2878
     durationInMonths: 6
+    quality: '4K HD'
+
+  subscription_{1..10} (extends subscription):
+    name: 'Abonnement <current()>'
 
 App\Entity\SubscriptionHistory:
   sub_history:
