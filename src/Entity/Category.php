@@ -29,6 +29,9 @@ class Category
     #[ORM\ManyToMany(targetEntity: Media::class, inversedBy: 'categories')]
     private Collection $medias;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
@@ -83,6 +86,34 @@ class Category
     public function removeMedia(Media $media): static
     {
         $this->medias->removeElement($media);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Movie>
+     */
+    public function getMovies(): Collection
+    {
+        return $this->medias->filter(fn (Media $media) => $media instanceof Movie);
+    }
+
+    /**
+     * @return Collection<int, Serie>
+     */
+    public function getSeries(): Collection
+    {
+        return $this->medias->filter(fn (Media $media) => $media instanceof Serie);
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }
