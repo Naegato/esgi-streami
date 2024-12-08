@@ -7,7 +7,7 @@ NODE_CONTAINER_NAME := node
 -include .env.local
 
 up: install
-	docker compose up -d
+	docker compose up -d --remove-orphans
 
 down:
 	docker compose down

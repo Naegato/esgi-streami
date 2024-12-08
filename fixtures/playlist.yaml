@@ -1,12 +1,12 @@
 App\Entity\Playlist:
-  playlist_{@user_*}_{1..3}:
+  playlist_{1..100}:
     name: 'Playlist <word()>'
     createdAt: '<dateTimeBetween("-1 year", "now")>'
     updatedAt: '<dateTimeBetween("now", "+1 year")>'
     creator: '@user_*'
 
 App\Entity\PlaylistMedia:
-  playlistMedia_{1..500}:
+  playlistMedia_{1..800}:
     addedAt: '<dateTimeBetween("-1 year", "now")>'
     playlist: '@playlist_*'
     media: '@media_*'
