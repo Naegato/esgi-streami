@@ -41,12 +41,12 @@ class Playlist
      * @var Collection<int, PlaylistMedia>
      */
     #[ORM\OneToMany(targetEntity: PlaylistMedia::class, mappedBy: 'playlist')]
-    private Collection $playlistMedia;
+    private Collection $playlistMedias;
 
     public function __construct()
     {
         $this->playlistSubscriptions = new ArrayCollection();
-        $this->playlistMedia = new ArrayCollection();
+        $this->playlistMedias = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -135,15 +135,31 @@ class Playlist
     /**
      * @return Collection<int, PlaylistMedia>
      */
-    public function getPlaylistMedia(): Collection
+    public function getPlaylistMedias(): Collection
     {
-        return $this->playlistMedia;
+        return $this->playlistMedias;
+    }
+
+    /**
+     * @return Collection<int, PlaylistMedia>
+     */
+    public function getPlaylistMediasMovies(): Collection
+    {
+        return $this->playlistMedias->filter(fn (PlaylistMedia $playlistMedia) => $playlistMedia->getMedia() instanceof Movie);
+    }
+
+    /**
+     * @return Collection<int, PlaylistMedia>
+     */
+    public function getPlaylistMediasSeries(): Collection
+    {
+        return $this->playlistMedias->filter(fn (PlaylistMedia $playlistMedia) => $playlistMedia->getMedia() instanceof Serie);
     }
 
     public function addPlaylistMedium(PlaylistMedia $playlistMedium): static
     {
-        if (!$this->playlistMedia->contains($playlistMedium)) {
-            $this->playlistMedia->add($playlistMedium);
+        if (!$this->playlistMedias->contains($playlistMedium)) {
+            $this->playlistMedias->add($playlistMedium);
             $playlistMedium->setPlaylist($this);
         }
 
@@ -152,7 +168,7 @@ class Playlist
 
     public function removePlaylistMedium(PlaylistMedia $playlistMedium): static
     {
-        if ($this->playlistMedia->removeElement($playlistMedium)) {
+        if ($this->playlistMedias->removeElement($playlistMedium)) {
             // set the owning side to null (unless already changed)
             if ($playlistMedium->getPlaylist() === $this) {
                 $playlistMedium->setPlaylist(null);
