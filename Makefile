@@ -31,7 +31,7 @@ entity:
 	docker compose exec -it ${PHP_CONTAINER_NAME} bin/console make:entity
 
 fixtures: create-db
-	docker compose exec ${PHP_CONTAINER_NAME} bin/console hautelook:fixtures:load --no-interaction
+	docker compose exec ${PHP_CONTAINER_NAME} bin/console hautelook:fixtures:load --no-interaction -vv
 
 logs:
 	docker compose logs -f
